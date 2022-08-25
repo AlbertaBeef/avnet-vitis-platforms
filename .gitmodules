@@ -1,0 +1,6 @@
+[submodule "common/platforms/bdf"]
+	path = common/platforms/bdf
+	url = https://github.com/Avnet/bdf.git
+[submodule "common/overlays/Vitis_Libraries"]
+	path = common/overlays/Vitis_Libraries
+	url = https://github.com/Xilinx/Vitis_Libraries.git
