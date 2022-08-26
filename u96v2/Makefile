@@ -8,12 +8,15 @@ PFM_DIR = $(PWD)/platforms
 PFM_VER = 2022_1
 
 # valid platforms / overlays
-PFM_LIST = u96v2_sbc_minimal u96v2_sbc_dualcam
-OVERLAY_LIST =  benchmark
+PFM_LIST = u96v2_sbc_minimal u96v2_sbc_dualcam2
+OVERLAY_LIST =  benchmark dualcam_dpu
 
 # override platform name based on overlay
 ifeq ($(OVERLAY),benchmark)
   override PFM = u96v2_sbc_minimal
+endif
+ifeq ($(OVERLAY),dualcam_dpu)
+  override PFM = u96v2_sbc_dualcam2
 endif
 
 PFM_XPFM = $(PFM_DIR)/avnet_$(PFM)_$(PFM_VER)/$(PFM).xpfm
