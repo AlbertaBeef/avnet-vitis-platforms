@@ -4165,14 +4165,13 @@ CONFIG_imagefeature-debug-tweaks=y
 CONFIG_auto-login=y
 
 #
-# apps 
+# user packages 
 #
 # CONFIG_gpio-demo is not set
 # CONFIG_peekpoke is not set
-
-#
-# user packages 
-#
+# CONFIG_vitis-ai-library is not set
+# CONFIG_vitis-ai-library-dbg is not set
+# CONFIG_vitis-ai-library-dev is not set
 
 #
 # PetaLinux RootFS Settings
