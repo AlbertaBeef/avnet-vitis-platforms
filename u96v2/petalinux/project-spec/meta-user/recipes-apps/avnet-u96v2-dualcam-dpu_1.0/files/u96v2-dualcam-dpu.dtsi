@@ -121,7 +121,7 @@
 			xlnx,dphy-present ;
 			xlnx,en-active-lanes ;
 			xlnx,max-lanes = <4>;
-			xlnx,ppc = <1>;
+			xlnx,ppc = <2>;
 			xlnx,vc = <4>;
 			xlnx,vfb ;
 			xlnx,csi-pxl-format = <0x1e>; // XCSI_DT_YUV4228B
@@ -165,7 +165,7 @@
 			xlnx,max-height = <2160>;
 			xlnx,max-width = <3840>;
 			xlnx,num-video-components = <3>;
-			xlnx,samples-per-clk = <1>;
+			xlnx,samples-per-clk = <2>;
 			xlnx,topology = <3>;
 			xlnx,use-uram = <0>;
 			xlnx,video-width = <8>;
@@ -211,8 +211,8 @@
 			xlnx,max-width = <3840>;
 			xlnx,num-hori-taps = <8>;
 			xlnx,num-vert-taps = <8>;
-			xlnx,pix-per-clk = <1>;
-			xlnx,samples-per-clk = <1>;
+			xlnx,pix-per-clk = <2>;
+			xlnx,samples-per-clk = <2>;
 			xlnx,scaler-algorithm = <2>;
 			xlnx,topology = <0>;
 			xlnx,use-uram = <0>;
@@ -255,10 +255,10 @@
 			interrupts = <0 105 4>;
 			reg = <0x0 0xb0020000 0x0 0x10000>;
 			xlnx,dma-addr-width = <32>;
-			xlnx,dma-align = <8>;
+			xlnx,dma-align = <16>;
 			xlnx,max-height = <2160>;
 			xlnx,max-width = <3840>;
-			xlnx,pixels-per-clock = <1>;
+			xlnx,pixels-per-clock = <2>;
 			xlnx,s-axi-ctrl-addr-width = <0x7>;
 			xlnx,s-axi-ctrl-data-width = <0x20>;
 			xlnx,vid-formats = "rgb888", "uyvy", "y8", "yuyv";
