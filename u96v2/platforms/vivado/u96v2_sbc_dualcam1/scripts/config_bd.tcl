@@ -1,6 +1,6 @@
 
 ################################################################
-# This is a generated script based on design: u96v2_sbc_dualcam2
+# This is a generated script based on design: u96v2_sbc_dualcam1
 #
 # Though there are limitations about the generated script,
 # the main purpose of this utility is to make learning
@@ -34,7 +34,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 ################################################################
 
 # To test this script, run the following commands from Vivado Tcl console:
-# source u96v2_sbc_dualcam2_script.tcl
+# source u96v2_sbc_dualcam1_script.tcl
 
 # If there is no project opened, this script will create a
 # project, but make sure you do not have an existing project
@@ -49,7 +49,7 @@ if { $list_projs eq "" } {
 
 # CHANGE DESIGN NAME HERE
 variable design_name
-set design_name u96v2_sbc_dualcam2
+set design_name u96v2_sbc_dualcam1
 
 # If you do not already have an existing IP Integrator design open,
 # you can create a design using the following command:
@@ -355,7 +355,7 @@ proc create_hier_cell_CAPTURE_PIPELINE { parentCell nameHier } {
    CONFIG.M_HAS_TLAST {1} \
    CONFIG.M_HAS_TREADY {1} \
    CONFIG.M_HAS_TSTRB {0} \
-   CONFIG.M_TDATA_NUM_BYTES {3} \
+   CONFIG.M_TDATA_NUM_BYTES {6} \
    CONFIG.M_TDEST_WIDTH {0} \
    CONFIG.M_TID_WIDTH {0} \
    CONFIG.M_TUSER_WIDTH {1} \
@@ -363,11 +363,11 @@ proc create_hier_cell_CAPTURE_PIPELINE { parentCell nameHier } {
    CONFIG.S_HAS_TLAST {1} \
    CONFIG.S_HAS_TREADY {1} \
    CONFIG.S_HAS_TSTRB {0} \
-   CONFIG.S_TDATA_NUM_BYTES {2} \
+   CONFIG.S_TDATA_NUM_BYTES {4} \
    CONFIG.S_TDEST_WIDTH {0} \
    CONFIG.S_TID_WIDTH {0} \
    CONFIG.S_TUSER_WIDTH {1} \
-   CONFIG.TDATA_REMAP {8'b00000000,tdata[15:0]} \
+   CONFIG.TDATA_REMAP {16'b00000000,tdata[31:0]} \
    CONFIG.TDEST_REMAP {1'b0} \
    CONFIG.TKEEP_REMAP {1'b0} \
    CONFIG.TLAST_REMAP {tlast[0]} \
@@ -384,7 +384,7 @@ proc create_hier_cell_CAPTURE_PIPELINE { parentCell nameHier } {
    CONFIG.CMN_INC_IIC {false} \
    CONFIG.CMN_INC_VFB {true} \
    CONFIG.CMN_NUM_LANES {4} \
-   CONFIG.CMN_NUM_PIXELS {1} \
+   CONFIG.CMN_NUM_PIXELS {2} \
    CONFIG.CMN_PXL_FORMAT {YUV422_8bit} \
    CONFIG.CSI_BUF_DEPTH {8192} \
    CONFIG.CSI_EMB_NON_IMG {false} \
@@ -429,8 +429,8 @@ proc create_hier_cell_CAPTURE_PIPELINE { parentCell nameHier } {
   # Create instance: v_frmbuf_wr_0, and set properties
   set v_frmbuf_wr_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_frmbuf_wr v_frmbuf_wr_0 ]
   set_property -dict [ list \
-   CONFIG.AXIMM_DATA_WIDTH {64} \
-   CONFIG.C_M_AXI_MM_VIDEO_DATA_WIDTH {64} \
+   CONFIG.AXIMM_DATA_WIDTH {128} \
+   CONFIG.C_M_AXI_MM_VIDEO_DATA_WIDTH {128} \
    CONFIG.HAS_BGR8 {1} \
    CONFIG.HAS_BGRX8 {0} \
    CONFIG.HAS_INTERLACED {0} \
@@ -444,20 +444,19 @@ proc create_hier_cell_CAPTURE_PIPELINE { parentCell nameHier } {
    CONFIG.HAS_Y_UV8 {0} \
    CONFIG.HAS_Y_UV8_420 {0} \
    CONFIG.MAX_NR_PLANES {1} \
-   CONFIG.SAMPLES_PER_CLOCK {1} \
+   CONFIG.SAMPLES_PER_CLOCK {2} \
  ] $v_frmbuf_wr_0
 
   # Create instance: v_proc_ss_csc_0, and set properties
   set v_proc_ss_csc_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_proc_ss v_proc_ss_csc_0 ]
   set_property -dict [ list \
-   CONFIG.C_AXIMM_DATA_WIDTH {64} \
    CONFIG.C_COLORSPACE_SUPPORT {1} \
    CONFIG.C_ENABLE_CSC {false} \
    CONFIG.C_ENABLE_DMA {false} \
    CONFIG.C_ENABLE_INTERLACED {false} \
    CONFIG.C_H_SCALER_TAPS {8} \
    CONFIG.C_MAX_DATA_WIDTH {8} \
-   CONFIG.C_SAMPLES_PER_CLK {1} \
+   CONFIG.C_SAMPLES_PER_CLK {2} \
    CONFIG.C_SCALER_ALGORITHM {2} \
    CONFIG.C_TOPOLOGY {3} \
    CONFIG.C_V_SCALER_TAPS {8} \
@@ -466,14 +465,13 @@ proc create_hier_cell_CAPTURE_PIPELINE { parentCell nameHier } {
   # Create instance: v_proc_ss_scaler_0, and set properties
   set v_proc_ss_scaler_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_proc_ss v_proc_ss_scaler_0 ]
   set_property -dict [ list \
-   CONFIG.C_AXIMM_DATA_WIDTH {64} \
    CONFIG.C_COLORSPACE_SUPPORT {1} \
    CONFIG.C_ENABLE_CSC {true} \
    CONFIG.C_ENABLE_DMA {false} \
    CONFIG.C_ENABLE_INTERLACED {false} \
    CONFIG.C_H_SCALER_TAPS {8} \
    CONFIG.C_MAX_DATA_WIDTH {8} \
-   CONFIG.C_SAMPLES_PER_CLK {1} \
+   CONFIG.C_SAMPLES_PER_CLK {2} \
    CONFIG.C_SCALER_ALGORITHM {2} \
    CONFIG.C_TOPOLOGY {0} \
    CONFIG.C_V_SCALER_TAPS {8} \
@@ -1326,7 +1324,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
    CONFIG.PSU__SATA__LANE0__ENABLE {0} \
    CONFIG.PSU__SATA__LANE1__ENABLE {0} \
    CONFIG.PSU__SATA__PERIPHERAL__ENABLE {0} \
-   CONFIG.PSU__SAXIGP2__DATA_WIDTH {64} \
+   CONFIG.PSU__SAXIGP2__DATA_WIDTH {128} \
    CONFIG.PSU__SD0_COHERENCY {0} \
    CONFIG.PSU__SD0_ROUTE_THROUGH_FPD {0} \
    CONFIG.PSU__SD0__DATA_TRANSFER_MODE {4Bit} \
