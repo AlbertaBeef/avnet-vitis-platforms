@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
- * dts file for Avnet Ultra96-V2 + DualCam Mezzanine + DPU (B1152) design
+ * dts file for Avnet ZUBoard + DualCam SYZYGY + DPU (B128) design
  *
  * (C) Copyright 2022, Avnet, Inc.
  *
@@ -11,89 +11,74 @@
 
 #include <dt-bindings/gpio/gpio.h>
 
-&fpga_full {	
-	#address-cells = <2>;
-	#size-cells = <2>;
-	firmware-name = "u96v2-dualcam-dpu.bit.bin";
-	resets = <&zynqmp_reset 116>, <&zynqmp_reset 117>, <&zynqmp_reset 118>, <&zynqmp_reset 119>;
-};
-
-&amba {
-	ap1302_osc: ap1302oscillator {
-		compatible = "fixed-clock";
-		#clock-cells = <0>;
-		clock-frequency  = <48000000>;
-		clock-output-names = "ap1302osc";
-	};
-};
-
-&i2csw_2 {
-	camera@3c {
-		status = "okay";
-		compatible = "onnn,ap1302";
-		reg = <0x3c>;
-
-		clocks = <&ap1302_osc>;
-
-		reset-gpios = <&gpio 39 1>; //<&gpio 39 GPIO_ACTIVE_LOW>;
-		standby-gpios = <&gpio 44 0>; //<&gpio 44 GPIO_ACTIVE_HIGH>;
-
-		port@2 {
-			reg = <2>;
-			ias_out0: endpoint {
-				remote-endpoint = <&mipi_csi_inCAPTURE_PIPELINE_mipi_csi2_rx_subsyst_0>;
-				data-lanes = <1 2 3 4>;
-			};
-		};
-
-		sensors {
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			onnn,model = "onnn,ar0144";
-
-			sensor@0 {
-				reg = <0>;
-			};
-
-			sensor@1 {
-				reg = <1>;
-			};
+/{ 
+	fragment@0 {
+		target = <&fpga_full>;
+		overlay0: __overlay__ {
+			#address-cells = <2>;
+			#size-cells = <2>;
+			firmware-name = "zub1cg-dualcam-dpu.bit.bin";
+			resets = <&zynqmp_reset 116>, <&zynqmp_reset 117>, <&zynqmp_reset 118>, <&zynqmp_reset 119>;
 		};
 	};
-};
-
-&amba {
-	afi0: afi0 {
-		compatible = "xlnx,afi-fpga";
-		config-afi = <0 0>, <1 0>, <2 0>, <3 0>, <4 0>, <5 0>, <6 0>, <7 0>, <8 0>, <9 0>, <10 0>, <11 0>, <12 0>, <13 0>, <14 0xa00>, <15 0x000>;
-		resets = <&zynqmp_reset 116>,
-				<&zynqmp_reset 117>,
-				<&zynqmp_reset 118>,
-				<&zynqmp_reset 119>;
-		reset-names = "pl0", "pl1", "pl2", "pl3";
-	};		
-	zocl: zyxclmm_drm {
-		compatible = "xlnx,zocl";
-		status = "okay";
-		interrupt-parent = <&gic>;
-		interrupts = <0 89  4>, <0 90  4>, <0 91  4>, <0 92  4>,
-			     <0 93  4>, <0 94  4>, <0 95  4>, <0 96  4>;
-	};
+	fragment@1 {
+		target = <&amba>;
+		overlay1: __overlay__ {
+			afi0: afi0 {
+				compatible = "xlnx,afi-fpga";
+				config-afi = <0 0>, <1 0>, <2 0>, <3 0>, <4 1>, <5 1>, <6 0>, <7 0>, <8 0>, <9 0>, <10 0>, <11 0>, <12 0>, <13 0>, <14 0xa00>, <15 0x000>;
+				resets = <&zynqmp_reset 116>,
+						<&zynqmp_reset 117>,
+						<&zynqmp_reset 118>,
+						<&zynqmp_reset 119>;
+				reset-names = "pl0", "pl1", "pl2", "pl3";
+			};		
+			zocl: zyxclmm_drm {
+				compatible = "xlnx,zocl";
+				status = "okay";
+				interrupt-parent = <&gic>;
+				interrupts = <0 89  4>, <0 90  4>, <0 91  4>, <0 92  4>,
+					     <0 93  4>, <0 94  4>, <0 95  4>, <0 96  4>;
+			};
 
 		misc_clk_0: misc_clk_0 {
 			#clock-cells = <0>;
 			clock-frequency = <200000000>;
 			compatible = "fixed-clock";
 		};
+		ap1302_osc: ap1302oscillator {
+			compatible = "fixed-clock";
+			#clock-cells = <0>;
+			clock-frequency  = <48000000>;
+			clock-output-names = "ap1302osc";
+		};
+		ap1302_vdd: fixedregulator@0 {
+			compatible = "regulator-fixed";
+			regulator-name = "ap1302_vdd";
+			regulator-min-microvolt = <2800000>;
+			regulator-max-microvolt = <2800000>;
+			enable-active-high;
+		};
+		ap1302_vaa: fixedregulator@1 {
+			compatible = "regulator-fixed";
+			regulator-name = "ap1302_vaa";
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <1800000>;
+		};
+		ap1302_vddio: fixedregulator@2 {
+			compatible = "regulator-fixed";
+			regulator-name = "ap1302_vddio";
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+		};
 
-		GPIO_axi_gpio_0: gpio@a0030000 {
+		GPIO_axi_gpio_0: gpio@a0000000 {
 			#gpio-cells = <3>;
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 71>;
 			compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
 			gpio-controller ;
-			reg = <0x0 0xa0030000 0x0 0x10000>;
+			reg = <0x0 0xa0000000 0x0 0x10000>;
 			xlnx,all-inputs = <0x0>;
 			xlnx,all-inputs-2 = <0x0>;
 			xlnx,all-outputs = <0x1>;
@@ -107,7 +92,57 @@
 			xlnx,tri-default = <0xFFFFFFFF>;
 			xlnx,tri-default-2 = <0xFFFFFFFF>;
 		};
-		
+		axi_iic_0: i2c@a0010000 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			clock-names = "s_axi_aclk";
+			clocks = <&zynqmp_clk 71>;
+			compatible = "xlnx,axi-iic-2.1", "xlnx,xps-iic-2.00.a";
+			interrupt-names = "iic2intc_irpt";
+			interrupt-parent = <&gic>;
+			interrupts = <0 106 4>;
+			reg = <0x0 0xa0010000 0x0 0x10000>;
+			
+			camera@3c {
+				status = "okay";
+				compatible = "onnn,ap1302";
+				reg = <0x3c>;
+
+				clocks = <&ap1302_osc>;
+
+				reset-gpios = <&GPIO_axi_gpio_0 6 0 GPIO_ACTIVE_LOW>;
+				standby-gpios = <&GPIO_axi_gpio_0 7 0 GPIO_ACTIVE_HIGH>;
+
+				port@2 {
+					reg = <2>;
+					ias_out0: endpoint {
+						remote-endpoint = <&mipi_csi_inCAPTURE_PIPELINE_mipi_csi2_rx_subsyst_0>;
+						data-lanes = <1 2 3 4>;
+					};
+				};
+
+				sensors {
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					onnn,model = "onnn,ar0144";
+
+					sensor@0 {
+						reg = <0>;
+						vdd-supply = <&ap1302_vdd>;
+						vaa-supply = <&ap1302_vaa>;
+						vddio-supply = <&ap1302_vddio>;						
+					};
+
+					sensor@1 {
+						reg = <1>;
+						vdd-supply = <&ap1302_vdd>;
+						vaa-supply = <&ap1302_vaa>;
+						vddio-supply = <&ap1302_vddio>;						
+					};
+				};
+			};
+		};
 		CAPTURE_PIPELINE_mipi_csi2_rx_subsyst_0: mipi_csi2_rx_subsystem@b0000000 {
 			clock-names = "lite_aclk", "dphy_clk_200M", "video_aclk";
 			clocks = <&misc_clk_0>, <&misc_clk_0>, <&misc_clk_0>;
@@ -283,51 +318,11 @@
 		};
 		
 		/*
-		axi_gpio_1: gpio@a0040000 {
-			#gpio-cells = <3>;
-			clock-names = "s_axi_aclk";
-			clocks = <&zynqmp_clk 71>;
-			compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
-			gpio-controller ;
-			reg = <0x0 0xa0040000 0x0 0x10000>;
-			xlnx,all-inputs = <0x0>;
-			xlnx,all-inputs-2 = <0x0>;
-			xlnx,all-outputs = <0x1>;
-			xlnx,all-outputs-2 = <0x0>;
-			xlnx,dout-default = <0x00000001>;
-			xlnx,dout-default-2 = <0x00000000>;
-			xlnx,gpio-width = <0x1>;
-			xlnx,gpio2-width = <0x20>;
-			xlnx,interrupt-present = <0x0>;
-			xlnx,is-dual = <0x0>;
-			xlnx,tri-default = <0xFFFFFFFF>;
-			xlnx,tri-default-2 = <0xFFFFFFFF>;
-		};
-		axi_gpio_2: gpio@a0050000 {
-			#gpio-cells = <3>;
-			clock-names = "s_axi_aclk";
-			clocks = <&zynqmp_clk 71>;
-			compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
-			gpio-controller ;
-			reg = <0x0 0xa0050000 0x0 0x10000>;
-			xlnx,all-inputs = <0x0>;
-			xlnx,all-inputs-2 = <0x0>;
-			xlnx,all-outputs = <0x1>;
-			xlnx,all-outputs-2 = <0x1>;
-			xlnx,dout-default = <0x00000000>;
-			xlnx,dout-default-2 = <0x00000000>;
-			xlnx,gpio-width = <0x1>;
-			xlnx,gpio2-width = <0x1>;
-			xlnx,interrupt-present = <0x0>;
-			xlnx,is-dual = <0x1>;
-			xlnx,tri-default = <0xFFFFFFFF>;
-			xlnx,tri-default-2 = <0xFFFFFFFF>;
-		};
-		system_management_wiz_0: system_management_wiz@a0080000 {
+		system_management_wiz_0: system_management_wiz@a0030000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 71>;
 			compatible = "xlnx,system-management-wiz-1.3";
-			reg = <0x0 0xa0080000 0x0 0x10000>;
+			reg = <0x0 0xa0030000 0x0 0x10000>;
 			xlnx,alarm-limit-r0 = <0xb794>;
 			xlnx,alarm-limit-r1 = <0x4e81>;
 			xlnx,alarm-limit-r10 = <0x4963>;
@@ -404,22 +399,22 @@
 			xlnx,configuration-r3 = <0xf>;
 			xlnx,configuration-r4 = <0x0>;
 			xlnx,configuration-r4-1 = <0xc>;
-			xlnx,configuration-r4-2 = <0xc>;
+			xlnx,configuration-r4-2 = <0xd>;
 			xlnx,configuration-r4-3 = <0xe>;
 			xlnx,configuration-r4-4 = <0xa>;
 			xlnx,configuration-slave0-ssit-r3 = <0xf>;
 			xlnx,configuration-slave0-ssit-r4-1 = <0xc>;
-			xlnx,configuration-slave0-ssit-r4-2 = <0xc>;
+			xlnx,configuration-slave0-ssit-r4-2 = <0xd>;
 			xlnx,configuration-slave0-ssit-r4-3 = <0xe>;
 			xlnx,configuration-slave0-ssit-r4-4 = <0xa>;
 			xlnx,configuration-slave1-ssit-r3 = <0xf>;
 			xlnx,configuration-slave1-ssit-r4-1 = <0xc>;
-			xlnx,configuration-slave1-ssit-r4-2 = <0xc>;
+			xlnx,configuration-slave1-ssit-r4-2 = <0xd>;
 			xlnx,configuration-slave1-ssit-r4-3 = <0xe>;
 			xlnx,configuration-slave1-ssit-r4-4 = <0xa>;
 			xlnx,configuration-slave2-ssit-r3 = <0xf>;
 			xlnx,configuration-slave2-ssit-r4-1 = <0xc>;
-			xlnx,configuration-slave2-ssit-r4-2 = <0xc>;
+			xlnx,configuration-slave2-ssit-r4-2 = <0xd>;
 			xlnx,configuration-slave2-ssit-r4-3 = <0xe>;
 			xlnx,configuration-slave2-ssit-r4-4 = <0xa>;
 			xlnx,dclk-frequency = <0x64>;
@@ -612,57 +607,41 @@
 			xlnx,vaux7 = <0x0>;
 			xlnx,vaux8 = <0x0>;
 			xlnx,vaux9 = <0x0>;
-			xlnx,vauxn0-loc = "C3";
-			xlnx,vauxn1-loc = "E3";
-			xlnx,vauxn10-loc = "G2";
-			xlnx,vauxn11-loc = "J1";
-			xlnx,vauxn12-loc = "M1";
-			xlnx,vauxn13-loc = "P1";
-			xlnx,vauxn14-loc = "T1";
-			xlnx,vauxn15-loc = "U1";
-			xlnx,vauxn2-loc = "G4";
-			xlnx,vauxn3-loc = "H5";
-			xlnx,vauxn4-loc = "M4";
-			xlnx,vauxn5-loc = "N4";
-			xlnx,vauxn6-loc = "R5";
-			xlnx,vauxn7-loc = "T4";
-			xlnx,vauxn8-loc = "D1";
-			xlnx,vauxn9-loc = "F1";
-			xlnx,vauxp0-loc = "D3";
-			xlnx,vauxp1-loc = "E4";
-			xlnx,vauxp10-loc = "H2";
-			xlnx,vauxp11-loc = "K1";
-			xlnx,vauxp12-loc = "M2";
-			xlnx,vauxp13-loc = "N2";
-			xlnx,vauxp14-loc = "R1";
-			xlnx,vauxp15-loc = "U2";
-			xlnx,vauxp2-loc = "H4";
-			xlnx,vauxp3-loc = "J5";
-			xlnx,vauxp4-loc = "M5";
-			xlnx,vauxp5-loc = "N5";
-			xlnx,vauxp6-loc = "P5";
-			xlnx,vauxp7-loc = "R4";
-			xlnx,vauxp8-loc = "E1";
-			xlnx,vauxp9-loc = "G1";
+			xlnx,vauxn0-loc = "A6";
+			xlnx,vauxn1-loc = "B5";
+			xlnx,vauxn10-loc = "F6";
+			xlnx,vauxn11-loc = "G5";
+			xlnx,vauxn12-loc = "L29";
+			xlnx,vauxn13-loc = "K30";
+			xlnx,vauxn14-loc = "M27";
+			xlnx,vauxn15-loc = "M32";
+			xlnx,vauxn2-loc = "A7";
+			xlnx,vauxn3-loc = "A9";
+			xlnx,vauxn4-loc = "C7";
+			xlnx,vauxn5-loc = "C5";
+			xlnx,vauxn6-loc = "D8";
+			xlnx,vauxn7-loc = "D6";
+			xlnx,vauxn8-loc = "F7";
+			xlnx,vauxn9-loc = "E5";
+			xlnx,vauxp0-loc = "B7";
+			xlnx,vauxp1-loc = "B6";
+			xlnx,vauxp10-loc = "G7";
+			xlnx,vauxp11-loc = "G6";
+			xlnx,vauxp12-loc = "L28";
+			xlnx,vauxp13-loc = "L30";
+			xlnx,vauxp14-loc = "N27";
+			xlnx,vauxp15-loc = "M31";
+			xlnx,vauxp2-loc = "A8";
+			xlnx,vauxp3-loc = "B9";
+			xlnx,vauxp4-loc = "C8";
+			xlnx,vauxp5-loc = "D5";
+			xlnx,vauxp6-loc = "E8";
+			xlnx,vauxp7-loc = "D7";
+			xlnx,vauxp8-loc = "F8";
+			xlnx,vauxp9-loc = "E6";
 			xlnx,vpvn = <0x0>;
 		};
-		*/
-
-};	
-
-
-&zynqmp_dpsub {
-	status = "okay";		
-};
-&zynqmp_dp_snd_pcm0 {
-	status = "okay";		
-};
-&zynqmp_dp_snd_pcm1 {
-	status = "okay";		
-};
-&zynqmp_dp_snd_card0 {
-	status = "okay";		
-};
-&zynqmp_dp_snd_codec0 {
-	status = "okay";		
+		*/	
+		};
+	};
 };
