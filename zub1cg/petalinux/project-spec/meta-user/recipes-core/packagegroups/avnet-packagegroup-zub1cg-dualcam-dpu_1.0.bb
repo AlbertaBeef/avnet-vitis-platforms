@@ -2,7 +2,7 @@ DESCRIPTION = "ZUBoard DUALCAM + DPU (B128) related packages"
 
 inherit packagegroup
 
-ZUB1CG_DUALCAM_PACKAGES = " \
+ZUB1CG_DUALCAM_DPU_PACKAGES = " \
    ap1302-firmware \
    avnet-zub1cg-dualcam-dpu \
    libdrm libdrm-tests libdrm-kms \
@@ -15,6 +15,7 @@ ZUB1CG_DUALCAM_PACKAGES = " \
    packagegroup-petalinux-opencv \
    packagegroup-petalinux-v4lutils \
    packagegroup-petalinux-x11 \
+   python-flask \   
    htop \
    jansson \
    target-factory \
@@ -23,7 +24,7 @@ ZUB1CG_DUALCAM_PACKAGES = " \
    "
 
 
-RDEPENDS_${PN} = "${ZUB1CG_DUALCAM_PACKAGES}"
+RDEPENDS_${PN} = "${ZUB1CG_DUALCAM_DPU_PACKAGES}"
 
 PR = "1.pl2021_2"
 COMPATIBLE_MACHINE = "^$"

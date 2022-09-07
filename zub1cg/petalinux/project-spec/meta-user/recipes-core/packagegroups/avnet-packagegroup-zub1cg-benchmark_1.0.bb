@@ -15,6 +15,7 @@ ZUB1CG_DPU_TRD_PACKAGES = " \
    packagegroup-petalinux-opencv \
    packagegroup-petalinux-v4lutils \
    packagegroup-petalinux-x11 \
+   python-flask \
    htop \
    jansson \
    target-factory \
