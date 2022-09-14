@@ -15,7 +15,7 @@ ZUB1CG_DUALCAM_DPU_PACKAGES = " \
    packagegroup-petalinux-opencv \
    packagegroup-petalinux-v4lutils \
    packagegroup-petalinux-x11 \
-   python-flask \   
+   python3-flask \   
    htop \
    jansson \
    target-factory \
