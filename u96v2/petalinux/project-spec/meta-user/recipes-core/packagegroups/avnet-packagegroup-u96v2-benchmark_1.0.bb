@@ -15,6 +15,7 @@ U96V2_DPU_TRD_PACKAGES = " \
    packagegroup-petalinux-opencv \
    packagegroup-petalinux-v4lutils \
    packagegroup-petalinux-x11 \
+   python3-flask \
    htop \
    jansson \
    target-factory \

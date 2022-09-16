@@ -2,7 +2,7 @@ DESCRIPTION = "Ultra96-V2 DUALCAM related packages"
 
 inherit packagegroup
 
-u96v2_DUALCAM_PACKAGES = " \
+U96V2_DUALCAM_DPU_PACKAGES = " \
    ap1302-firmware \
    avnet-u96v2-dualcam-dpu \
    libdrm libdrm-tests libdrm-kms \
@@ -15,6 +15,7 @@ u96v2_DUALCAM_PACKAGES = " \
    packagegroup-petalinux-opencv \
    packagegroup-petalinux-v4lutils \
    packagegroup-petalinux-x11 \
+   python3-flask \
    htop \
    jansson \
    target-factory \
@@ -23,7 +24,7 @@ u96v2_DUALCAM_PACKAGES = " \
    "
 
 
-RDEPENDS_${PN} = "${u96v2_DUALCAM_PACKAGES}"
+RDEPENDS_${PN} = "${U96V2_DUALCAM_DPU_PACKAGES}"
 
 PR = "1.pl2021_2"
 COMPATIBLE_MACHINE = "^$"
