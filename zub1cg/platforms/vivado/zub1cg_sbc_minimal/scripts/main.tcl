@@ -35,9 +35,9 @@ if {[expr {![catch {file lstat $bdf_path finfo}]}]} {
    return -code ok
 }
 
-create_project -name $proj_name -force -dir $proj_dir -part [get_property PART_NAME [get_board_parts $proj_board]]
-set_property board_part $proj_board [current_project]
-#create_project -name $proj_name -force -dir $proj_dir -part xczu1cg-sbva484-1-e
+#create_project -name $proj_name -force -dir $proj_dir -part [get_property PART_NAME [get_board_parts $proj_board]]
+#set_property board_part $proj_board [current_project]
+create_project -name $proj_name -force -dir $proj_dir -part xczu1cg-sbva484-1-e
 
 import_files -fileset constrs_1 $xdc_list
 

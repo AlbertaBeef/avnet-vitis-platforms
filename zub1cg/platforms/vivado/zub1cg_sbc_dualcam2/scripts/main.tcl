@@ -1,5 +1,5 @@
 
-set proj_name xbzu1_dualcam
+set proj_name zub1cg_sbc_dualcam2
 set proj_dir ./project
 set proj_board avnet:zub1cg:1.0
 set bd_tcl_dir ./scripts
@@ -7,6 +7,8 @@ set board xboard_zu1
 set rev None
 set output {xsa}
 set xdc_list {./xdc/pin.xdc}
+#set ip_repo_path {./ip}
+#set ip_repo_path {../ip}
 set src_repo_path {./src}
 set jobs 8
 
@@ -20,7 +22,7 @@ for { set i 0 } { $i < $argc } { incr i } {
 }
 
 # set board repo path
-set bdf_path [file normalize [pwd]/../../bdf]
+set bdf_path [file normalize [pwd]/../../../../common/platforms/bdf]
 if {[expr {![catch {file lstat $bdf_path finfo}]}]} {
    set_param board.repoPaths $bdf_path
    puts "\n\n*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
@@ -38,9 +40,6 @@ if {[expr {![catch {file lstat $bdf_path finfo}]}]} {
 create_project -name $proj_name -force -dir $proj_dir -part xczu1cg-sbva484-1-e
 
 import_files -fileset constrs_1 $xdc_list
-
-#set_property board_connections {som240_1_connector xilinx.com:som240:som240_1_connector:1.0}  [current_project]
-
 
 #set_property ip_repo_paths $ip_repo_path [current_project]
 #update_ip_catalog
@@ -100,8 +99,11 @@ foreach ip [get_ips] {
 close $fd
 
 set_property synth_checkpoint_mode Hierarchical [get_files $proj_dir/${proj_name}.srcs/sources_1/bd/$proj_name/${proj_name}.bd]
-launch_runs synth_1 -jobs $jobs
-wait_on_run synth_1
+#launch_runs synth_1 -jobs $jobs
+#wait_on_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs $jobs
+wait_on_run impl_1
+open_run impl_1
 
 set_property platform.board_id $proj_name [current_project]
 
@@ -121,11 +123,12 @@ set_property platform.platform_state "pre_synth" [current_project]
 
 set_property platform.name $proj_name [current_project]
 
-set_property platform.vendor "xilinx" [current_project]
+set_property platform.vendor "avnet" [current_project]
 
 set_property platform.version "1.0" [current_project]
 
-write_hw_platform -force -file $proj_dir/${proj_name}.xsa
+#write_hw_platform -force -file $proj_dir/${proj_name}.xsa
+write_hw_platform -force -file $proj_dir/${proj_name}.xsa -include_bit
 validate_hw_platform -verbose $proj_dir/${proj_name}.xsa
 
 exit

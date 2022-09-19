@@ -20,7 +20,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2021.2
+set scripts_vivado_version 2022.1
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -467,7 +467,9 @@ proc create_hier_cell_CAPTURE_PIPELINE { parentCell nameHier } {
    CONFIG.HAS_YUYV8 {1} \
    CONFIG.HAS_Y_UV8 {0} \
    CONFIG.HAS_Y_UV8_420 {0} \
+   CONFIG.MAX_COLS {3840} \
    CONFIG.MAX_NR_PLANES {1} \
+   CONFIG.MAX_ROWS {2160} \
    CONFIG.SAMPLES_PER_CLOCK {1} \
  ] $v_frmbuf_wr_0
 
@@ -480,7 +482,9 @@ proc create_hier_cell_CAPTURE_PIPELINE { parentCell nameHier } {
    CONFIG.C_ENABLE_DMA {false} \
    CONFIG.C_ENABLE_INTERLACED {false} \
    CONFIG.C_H_SCALER_TAPS {8} \
+   CONFIG.C_MAX_COLS {3840} \
    CONFIG.C_MAX_DATA_WIDTH {8} \
+   CONFIG.C_MAX_ROWS {2160} \
    CONFIG.C_SAMPLES_PER_CLK {1} \
    CONFIG.C_SCALER_ALGORITHM {2} \
    CONFIG.C_TOPOLOGY {3} \
@@ -496,7 +500,9 @@ proc create_hier_cell_CAPTURE_PIPELINE { parentCell nameHier } {
    CONFIG.C_ENABLE_DMA {false} \
    CONFIG.C_ENABLE_INTERLACED {false} \
    CONFIG.C_H_SCALER_TAPS {8} \
+   CONFIG.C_MAX_COLS {3840} \
    CONFIG.C_MAX_DATA_WIDTH {8} \
+   CONFIG.C_MAX_ROWS {2160} \
    CONFIG.C_SAMPLES_PER_CLK {1} \
    CONFIG.C_SCALER_ALGORITHM {2} \
    CONFIG.C_TOPOLOGY {0} \
@@ -1503,6 +1509,7 @@ Port;FD4A0000;FD4AFFFF;0|FPD;DPDMA;FD4C0000;FD4CFFFF;0|FPD;DDR_XMPU5_CFG;FD05000
   set_property PFM.IRQ {pl_ps_irq0 {id 0 range 7}} [get_bd_cells /zynq_ultra_ps_e_0]
 
 
+  validate_bd_design
   save_bd_design
 }
 # End of create_root_design()

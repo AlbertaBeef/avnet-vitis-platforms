@@ -1,6 +1,6 @@
 
 ################################################################
-# This is a generated script based on design: u96v2_mipiRx2_DP
+# This is a generated script based on design: u96v2_sbc_dualcam2
 #
 # Though there are limitations about the generated script,
 # the main purpose of this utility is to make learning
@@ -20,7 +20,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2021.2
+set scripts_vivado_version 2022.1
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -34,7 +34,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 ################################################################
 
 # To test this script, run the following commands from Vivado Tcl console:
-# source u96v2_mipiRx2_DP_script.tcl
+# source u96v2_sbc_dualcam2_script.tcl
 
 # If there is no project opened, this script will create a
 # project, but make sure you do not have an existing project
@@ -49,7 +49,7 @@ if { $list_projs eq "" } {
 
 # CHANGE DESIGN NAME HERE
 variable design_name
-set design_name u96v2_mipiRx2_DP
+set design_name u96v2_sbc_dualcam2
 
 # If you do not already have an existing IP Integrator design open,
 # you can create a design using the following command:

@@ -7,6 +7,8 @@ set board ultra96v2
 set rev None
 set output {xsa}
 set xdc_list {./xdc/pin.xdc}
+#set ip_repo_path {./ip}
+#set ip_repo_path {../ip}
 set src_repo_path {./src}
 set jobs 8
 
@@ -120,7 +122,7 @@ set_property platform.platform_state "pre_synth" [current_project]
 
 set_property platform.name $proj_name [current_project]
 
-set_property platform.vendor "xilinx" [current_project]
+set_property platform.vendor "avnet" [current_project]
 
 set_property platform.version "1.0" [current_project]
 
