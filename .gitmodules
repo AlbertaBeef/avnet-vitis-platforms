@@ -4,3 +4,7 @@
 [submodule "common/overlays/Vitis_Libraries"]
 	path = common/overlays/Vitis_Libraries
 	url = https://github.com/Xilinx/Vitis_Libraries.git
+[submodule "common/petalinux/meta-avnet"]
+	path = common/petalinux/meta-avnet
+	url = https://github.com/Avnet/meta-avnet.git
+	branch = 2022.1
