@@ -8,3 +8,6 @@
 	path = common/petalinux/meta-avnet
 	url = https://github.com/Avnet/meta-avnet.git
 	branch = 2022.1
+[submodule "common/petalinux/meta-ros"]
+	path = common/petalinux/meta-ros
+	url = https://github.com/ros/meta-ros.git
