@@ -5,3 +5,11 @@
 	path = common/petalinux/meta-avnet
 	url = https://github.com/Avnet/meta-avnet.git
 	branch = 2021.2
+[submodule "common/overlays/Vitis-AI"]
+	path = common/overlays/Vitis-AI
+	url = https://github.com/Xilinx/Vitis-AI.git
+	branch = 2.0
+[submodule "common/overlays/Vitis_Libraries"]
+	path = common/overlays/Vitis_Libraries
+	url = https://github.com/Xilinx/Vitis_Libraries.git
+	branch = 2021.2
