@@ -8,7 +8,7 @@ PFM_DIR = $(PWD)/platforms
 PFM_VER = 2022_1
 
 # valid platforms / overlays
-PFM_LIST = u96v2_sbc_minimal u96v2_sbc_dualcam2
+PFM_LIST = u96v2_sbc_minimal u96v2_sbc_dualcam1 u96v2_sbc_dualcam2
 OVERLAY_LIST =  benchmark dualcam_dpu
 
 # override platform name based on overlay
