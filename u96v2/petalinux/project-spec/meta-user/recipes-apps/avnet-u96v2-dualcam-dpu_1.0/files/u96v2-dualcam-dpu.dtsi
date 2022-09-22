@@ -11,81 +11,121 @@
 
 #include <dt-bindings/gpio/gpio.h>
 
-&fpga_full {	
-	#address-cells = <2>;
-	#size-cells = <2>;
-	firmware-name = "u96v2-dualcam-dpu.bit.bin";
-	resets = <&zynqmp_reset 116>, <&zynqmp_reset 117>, <&zynqmp_reset 118>, <&zynqmp_reset 119>;
-};
-
-&amba {
-	ap1302_osc: ap1302oscillator {
-		compatible = "fixed-clock";
-		#clock-cells = <0>;
-		clock-frequency  = <48000000>;
-		clock-output-names = "ap1302osc";
-	};
-};
-
-&i2csw_2 {
-	camera@3c {
-		status = "okay";
-		compatible = "onnn,ap1302";
-		reg = <0x3c>;
-
-		clocks = <&ap1302_osc>;
-
-		reset-gpios = <&gpio 39 1>; //<&gpio 39 GPIO_ACTIVE_LOW>;
-		standby-gpios = <&gpio 44 0>; //<&gpio 44 GPIO_ACTIVE_HIGH>;
-
-		port@2 {
-			reg = <2>;
-			ias_out0: endpoint {
-				remote-endpoint = <&mipi_csi_inCAPTURE_PIPELINE_mipi_csi2_rx_subsyst_0>;
-				data-lanes = <1 2 3 4>;
-			};
-		};
-
-		sensors {
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			onnn,model = "onnn,ar0144";
-
-			sensor@0 {
-				reg = <0>;
-			};
-
-			sensor@1 {
-				reg = <1>;
-			};
+/{ 
+	fragment@0 {
+		target = <&fpga_full>;
+		overlay0: __overlay__ {
+			#address-cells = <2>;
+			#size-cells = <2>;
+			firmware-name = "u96v2-dualcam-dpu.bit.bin";
+			resets = <&zynqmp_reset 116>, <&zynqmp_reset 117>, <&zynqmp_reset 118>, <&zynqmp_reset 119>;
 		};
 	};
-};
+	fragment@1 {
+		target = <&amba>;
+		overlay1: __overlay__ {
+			afi0: afi0 {
+				compatible = "xlnx,afi-fpga";
+				config-afi = <0 0>, <1 0>, <2 0>, <3 0>, <4 0>, <5 0>, <6 0>, <7 0>, <8 0>, <9 0>, <10 0>, <11 0>, <12 0>, <13 0>, <14 0xa00>, <15 0x000>;
+				resets = <&zynqmp_reset 116>,
+						<&zynqmp_reset 117>,
+						<&zynqmp_reset 118>,
+						<&zynqmp_reset 119>;
+				reset-names = "pl0", "pl1", "pl2", "pl3";
+			};		
+			zocl: zyxclmm_drm {
+				compatible = "xlnx,zocl";
+				status = "okay";
+				interrupt-parent = <&gic>;
+				interrupts = <0 89  4>, <0 90  4>, <0 91  4>, <0 92  4>,
+					     <0 93  4>, <0 94  4>, <0 95  4>, <0 96  4>;
+			};
 
-&amba {
-	afi0: afi0 {
-		compatible = "xlnx,afi-fpga";
-		config-afi = <0 0>, <1 0>, <2 0>, <3 0>, <4 0>, <5 0>, <6 0>, <7 0>, <8 0>, <9 0>, <10 0>, <11 0>, <12 0>, <13 0>, <14 0xa00>, <15 0x000>;
-		resets = <&zynqmp_reset 116>,
-				<&zynqmp_reset 117>,
-				<&zynqmp_reset 118>,
-				<&zynqmp_reset 119>;
-		reset-names = "pl0", "pl1", "pl2", "pl3";
-	};		
-	zocl: zyxclmm_drm {
-		compatible = "xlnx,zocl";
-		status = "okay";
-		interrupt-parent = <&gic>;
-		interrupts = <0 89  4>, <0 90  4>, <0 91  4>, <0 92  4>,
-			     <0 93  4>, <0 94  4>, <0 95  4>, <0 96  4>;
+			misc_clk_0: misc_clk_0 {
+				#clock-cells = <0>;
+				clock-frequency = <200000000>;
+				compatible = "fixed-clock";
+			};
+			ap1302_osc: ap1302oscillator {
+				compatible = "fixed-clock";
+				#clock-cells = <0>;
+				clock-frequency  = <48000000>;
+				clock-output-names = "ap1302osc";
+			};
+			ap1302_vdd: fixedregulator@0 {
+				compatible = "regulator-fixed";
+				regulator-name = "ap1302_vdd";
+				regulator-min-microvolt = <2800000>;
+				regulator-max-microvolt = <2800000>;
+				enable-active-high;
+			};
+			ap1302_vaa: fixedregulator@1 {
+				compatible = "regulator-fixed";
+				regulator-name = "ap1302_vaa";
+				regulator-min-microvolt = <1800000>;
+				regulator-max-microvolt = <1800000>;
+			};
+			ap1302_vddio: fixedregulator@2 {
+				compatible = "regulator-fixed";
+				regulator-name = "ap1302_vddio";
+				regulator-min-microvolt = <1200000>;
+				regulator-max-microvolt = <1200000>;
+			};
+
+		};
 	};
 
-		misc_clk_0: misc_clk_0 {
-			#clock-cells = <0>;
-			clock-frequency = <200000000>;
-			compatible = "fixed-clock";
+
+	fragment@2 {
+		target = <&i2csw_2>;
+		overlay2: __overlay__ {
+
+			camera@3c {
+				status = "okay";
+				compatible = "onnn,ap1302";
+				reg = <0x3c>;
+
+				clocks = <&ap1302_osc>;
+
+				reset-gpios = <&gpio 39 1>; //<&gpio 39 GPIO_ACTIVE_LOW>;
+				standby-gpios = <&gpio 44 0>; //<&gpio 44 GPIO_ACTIVE_HIGH>;
+
+				port@2 {
+					reg = <2>;
+					ias_out0: endpoint {
+						remote-endpoint = <&mipi_csi_inCAPTURE_PIPELINE_mipi_csi2_rx_subsyst_0>;
+						data-lanes = <1 2 3 4>;
+					};
+				};
+
+				sensors {
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					onnn,model = "onnn,ar0144";
+
+					sensor@0 {
+						reg = <0>;
+						vdd-supply = <&ap1302_vdd>;
+						vaa-supply = <&ap1302_vaa>;
+						vddio-supply = <&ap1302_vddio>;						
+					};
+
+					sensor@1 {
+						reg = <1>;
+						vdd-supply = <&ap1302_vdd>;
+						vaa-supply = <&ap1302_vaa>;
+						vddio-supply = <&ap1302_vddio>;						
+					};
+				};
+			};
 		};
+	};
+
+	fragment@3 {
+		target = <&amba>;
+		overlay3: __overlay__ {
+
 
 		GPIO_axi_gpio_0: gpio@a0030000 {
 			#gpio-cells = <3>;
@@ -647,22 +687,36 @@
 			xlnx,vpvn = <0x0>;
 		};
 		*/
-
-};	
-
-
-&zynqmp_dpsub {
-	status = "okay";		
-};
-&zynqmp_dp_snd_pcm0 {
-	status = "okay";		
-};
-&zynqmp_dp_snd_pcm1 {
-	status = "okay";		
-};
-&zynqmp_dp_snd_card0 {
-	status = "okay";		
-};
-&zynqmp_dp_snd_codec0 {
-	status = "okay";		
+		};
+	};
+	fragment@4 {
+		target = <&zynqmp_dpsub>;
+		overlay4: __overlay__ {
+			status = "okay";		
+		};
+	};
+	fragment@5 {
+		target = <&zynqmp_dp_snd_pcm0>;
+		overlay5: __overlay__ {
+			status = "okay";		
+		};
+	};
+	fragment@6 {
+		target = <&zynqmp_dp_snd_pcm1>;
+		overlay6: __overlay__ {
+			status = "okay";		
+		};
+	};
+	fragment@7 {
+		target = <&zynqmp_dp_snd_card0>;
+		overlay7: __overlay__ {
+			status = "okay";		
+		};
+	};
+	fragment@8 {
+		target = <&zynqmp_dp_snd_codec0>;
+		overlay8: __overlay__ {
+			status = "okay";		
+		};
+	};
 };
