@@ -9,8 +9,6 @@ U96V2_DPU_TRD_PACKAGES = " \
    xrt xrt-dev \
    zocl \
    opencl-headers \
-   packagegroup-petalinux-vitisai \
-   packagegroup-petalinux-vitisai-dev \
    packagegroup-petalinux-gstreamer \
    packagegroup-petalinux-opencv \
    packagegroup-petalinux-v4lutils \
@@ -24,7 +22,7 @@ U96V2_DPU_TRD_PACKAGES = " \
    "
 
 
-RDEPENDS_${PN} = "${U96V2_DPU_TRD_PACKAGES}"
+RDEPENDS:${PN} = "${U96V2_DPU_TRD_PACKAGES}"
 
 PR = "1.pl2022_1"
 COMPATIBLE_MACHINE = "^$"
