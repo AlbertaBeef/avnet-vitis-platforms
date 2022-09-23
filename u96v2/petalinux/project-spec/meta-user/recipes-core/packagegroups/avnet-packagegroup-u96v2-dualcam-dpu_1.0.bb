@@ -9,8 +9,6 @@ U96V2_DUALCAM_DPU_PACKAGES = " \
    xrt xrt-dev \
    zocl \
    opencl-headers \
-   packagegroup-petalinux-vitisai \
-   packagegroup-petalinux-vitisai-dev \
    packagegroup-petalinux-gstreamer \
    packagegroup-petalinux-opencv \
    packagegroup-petalinux-v4lutils \
@@ -26,7 +24,7 @@ U96V2_DUALCAM_DPU_PACKAGES = " \
 
 RDEPENDS:${PN} = "${U96V2_DUALCAM_DPU_PACKAGES}"
 
-PR = "1.pl2021_2"
+PR = "1.pl2022_1"
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:u96v2-sbc = "${MACHINE}"
 
