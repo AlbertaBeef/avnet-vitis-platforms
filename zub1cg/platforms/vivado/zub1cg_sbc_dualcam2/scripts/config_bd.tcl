@@ -1509,7 +1509,6 @@ Port;FD4A0000;FD4AFFFF;0|FPD;DPDMA;FD4C0000;FD4CFFFF;0|FPD;DDR_XMPU5_CFG;FD05000
   set_property PFM.IRQ {pl_ps_irq0 {id 0 range 7}} [get_bd_cells /zynq_ultra_ps_e_0]
 
 
-  validate_bd_design
   save_bd_design
 }
 # End of create_root_design()
