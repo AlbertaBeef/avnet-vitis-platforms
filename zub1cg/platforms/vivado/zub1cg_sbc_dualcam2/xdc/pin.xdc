@@ -53,11 +53,11 @@ set_property DRIVE 8 [get_ports ap1302_isp*]
 #
 # Timing paths & constraints
 #
-#set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {zub1cg_sbc_dualcam_i/mipi_csi2_rx_subsyst_0/inst/phy/inst/inst/bd_d10d_phy_0_rx_support_i/slave_rx.bd_d10d_phy_0_rx_hssio_i/inst/top_inst/bs_top_inst/u_rx_bs/RX_BS[13].rx_bitslice_if_bs/FIFO_WRCLK_OUT}]]
-#set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT3]]
-set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {zub1cg_sbc_dualcam_i/mipi_csi2_rx_subsyst_0/inst/phy/inst/inst/bd_d10d_phy_0_rx_support_i/slave_rx.bd_d10d_phy_0_rx_hssio_i/inst/top_inst/bs_top_inst/u_rx_bs/RX_BS[13].rx_bitslice_if_bs/FIFO_WRCLK_OUT}]]
-set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT3]]
-set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT3]] -to [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT4]]
+#set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {zub1cg_sbc_dualcam2_i/mipi_csi2_rx_subsyst_0/inst/phy/inst/inst/bd_d10d_phy_0_rx_support_i/slave_rx.bd_d10d_phy_0_rx_hssio_i/inst/top_inst/bs_top_inst/u_rx_bs/RX_BS[13].rx_bitslice_if_bs/FIFO_WRCLK_OUT}]]
+#set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT3]]
+set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {zub1cg_sbc_dualcam2_i/mipi_csi2_rx_subsyst_0/inst/phy/inst/inst/bd_d10d_phy_0_rx_support_i/slave_rx.bd_d10d_phy_0_rx_hssio_i/inst/top_inst/bs_top_inst/u_rx_bs/RX_BS[13].rx_bitslice_if_bs/FIFO_WRCLK_OUT}]]
+set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT3]]
+set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT3]] -to [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT4]]
 # machine generated below
-#set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT2]]
+#set_false_path -from [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins zub1cg_sbc_dualcam2_i/clk_wiz_0/inst/mmcme4_adv_inst/CLKOUT2]]
 
