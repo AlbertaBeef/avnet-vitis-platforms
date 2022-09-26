@@ -107,7 +107,7 @@
 // | Pool Average Configuration
 // | It relates to model. if change, must update model
 // +------------------------------------------------------+
-// | Enable  : `define POOL_AVG_ENABLE              
+// | setting 0  : `define ALU_PARALLEL_DEFAULT              
 // +------------------------------------------------------+
 // | setting 1  : `define ALU_PARALLEL_1                
 // |------------------------------------------------------|
