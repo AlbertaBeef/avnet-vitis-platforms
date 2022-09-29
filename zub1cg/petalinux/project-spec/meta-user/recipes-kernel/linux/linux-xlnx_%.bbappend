@@ -1,4 +1,5 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI:append = " file://bsp.cfg"
-KERNEL_FEATURES:append = " bsp.cfg"
+SRC_URI += "file://user_ap1302.cfg \
+            file://0001-Adding-v4l-control-for-the-ap1302-AF-Flip-3d-path.patch \
+            "
