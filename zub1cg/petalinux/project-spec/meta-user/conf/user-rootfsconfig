@@ -3,3 +3,7 @@
 
 CONFIG_gpio-demo
 CONFIG_peekpoke
+
+CONFIG_vitis-ai-library
+CONFIG_vitis-ai-library-dev
+CONFIG_vitis-ai-library-dbg
