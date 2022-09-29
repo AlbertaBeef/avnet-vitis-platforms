@@ -4102,8 +4102,14 @@ CONFIG_Init-manager-systemd=y
 #
 # user packages 
 #
+CONFIG_avnet-packagegroup-zub1cg-benchmark=y
+CONFIG_avnet-packagegroup-zub1cg-dualcam=y
+CONFIG_avnet-packagegroup-zub1cg-dualcam-dpu=y
 # CONFIG_gpio-demo is not set
 # CONFIG_peekpoke is not set
+CONFIG_vitis-ai-library=y
+CONFIG_vitis-ai-library-dbg=y
+CONFIG_vitis-ai-library-dev=y
 
 #
 # PetaLinux RootFS Settings
