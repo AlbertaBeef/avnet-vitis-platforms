@@ -17,4 +17,4 @@ SRC_URI = "file://zub1cg-dualcam-dpu.bit \
            "
 
 S = "${WORKDIR}"
-PR = "1.pl2021_2"
+PR = "1.pl2022_1"

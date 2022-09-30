@@ -11,3 +11,7 @@
 [submodule "common/petalinux/meta-ros"]
 	path = common/petalinux/meta-ros
 	url = https://github.com/ros/meta-ros.git
+[submodule "common/petalinux/meta-ros-honister-humble"]
+	path = common/petalinux/meta-ros-honister-humble
+	url = https://github.com/vmayoral/meta-ros.git
+	branch = honister-humble
