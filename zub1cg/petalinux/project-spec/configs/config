@@ -136,7 +136,7 @@ CONFIG_SUBSYSTEM_EXTRA_DT_FILES=""
 #
 CONFIG_SUBSYSTEM_BOOTARGS_AUTO=y
 CONFIG_SUBSYSTEM_BOOTARGS_EARLYPRINTK=y
-
+CONFIG_SUBSYSTEM_BOOTARGS_GENERATED=" earlycon console=ttyPS0,115200 clk_ignore_unused root=/dev/mmcblk0p2 rw rootwait"
 CONFIG_SUBSYSTEM_DEVICETREE_COMPILER_FLAGS="-@"
 # CONFIG_SUBSYSTEM_DTB_OVERLAY is not set
 # CONFIG_SUBSYSTEM_REMOVE_PL_DTB is not set
@@ -287,5 +287,7 @@ CONFIG_YOCTO_NETWORK_SSTATE_FEEDS_URL="http://petalinux.xilinx.com/sswreleases/r
 # User Layers
 #
 CONFIG_USER_LAYER_0="${PROOT}/project-spec/meta-avnet"
-CONFIG_USER_LAYER_1=""
-CONFIG_SUBSYSTEM_BOOTARGS_GENERATED=" earlycon console=ttyPS0,115200 clk_ignore_unused root=/dev/mmcblk0p2 rw rootwait"
+CONFIG_USER_LAYER_1="${PROOT}/project-spec/meta-ros/meta-ros-common"
+CONFIG_USER_LAYER_2="${PROOT}/project-spec/meta-ros/meta-ros2"
+CONFIG_USER_LAYER_3="${PROOT}/project-spec/meta-ros/meta-ros2-foxy"
+CONFIG_USER_LAYER_4=""

@@ -1,0 +1,23 @@
+From e5be9eb2e2d812a346d91ea10311c7492788e338 Mon Sep 17 00:00:00 2001
+From: Brian Wiec <bswiec@gmail.com>
+Date: Tue, 24 May 2022 10:56:16 -0400
+Subject: [PATCH] Modified capture interface to use CAP_GSTREAMER instead of
+ CAP_V4L2
+
+---
+ src/capture.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/capture.cpp b/src/capture.cpp
+index d47a6a1..5227091 100644
+--- a/src/capture.cpp
++++ b/src/capture.cpp
+@@ -94,7 +94,7 @@ void Capture::open(int32_t device_id)
+ 
+ void Capture::open(const std::string &device_path)
+ {
+-  cap_.open(device_path, cv::CAP_V4L);
++  cap_.open(device_path, cv::CAP_GSTREAMER);
+   if (!cap_.isOpened())
+   {
+     throw DeviceError("device_path " + device_path + " cannot be opened");

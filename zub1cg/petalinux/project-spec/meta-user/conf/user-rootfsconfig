@@ -8,6 +8,9 @@ CONFIG_vitis-ai-library
 CONFIG_vitis-ai-library-dev
 CONFIG_vitis-ai-library-dbg
 
+CONFIG_cv-camera
+CONFIG_cv-camera-dev
+
 CONFIG_avnet-packagegroup-zub1cg-benchmark
 CONFIG_avnet-packagegroup-zub1cg-dualcam-dpu
 CONFIG_avnet-packagegroup-zub1cg-dualcam
