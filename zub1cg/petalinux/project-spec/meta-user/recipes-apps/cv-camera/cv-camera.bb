@@ -34,20 +34,20 @@ ROS_BUILDTOOL_DEPENDS = " \
 "
 
 DEPENDS = "\
-	rclcpp \
+  rclcpp \
   opencv \
   sensor-msgs \
   image-transport \
-	cv-bridge \
+  cv-bridge \
   std-msgs \
   camera-info-manager \
   builtin-interfaces \
   boost \
-	${ROS_BUILDTOOL_DEPENDS} \
+  ${ROS_BUILDTOOL_DEPENDS} \
 "
 
 ROS_BUILD_TYPE = "ament_cmake"
 inherit ros_${ROS_BUILD_TYPE}
 
-inherit ros_distro_foxy ros_superflore_generated
+inherit ros_distro_humble ros_superflore_generated
 
