@@ -4102,9 +4102,6 @@ CONFIG_Init-manager-systemd=y
 #
 # apps 
 #
-CONFIG_avnet-u96v2-benchmark=y
-CONFIG_avnet-u96v2-benchmark-boot=y
-CONFIG_avnet-u96v2-dualcam-dpu=y
 CONFIG_cam-detection=y
 CONFIG_cv-camera=y
 CONFIG_display-fps=y
@@ -4117,6 +4114,7 @@ CONFIG_lidar-detection=y
 #
 CONFIG_avnet-packagegroup-u96v2-benchmark=y
 CONFIG_avnet-packagegroup-u96v2-dualcam=y
+CONFIG_avnet-packagegroup-u96v2-dualcam-dpu=y
 CONFIG_cv-camera-dev=y
 # CONFIG_gpio-demo is not set
 # CONFIG_peekpoke is not set

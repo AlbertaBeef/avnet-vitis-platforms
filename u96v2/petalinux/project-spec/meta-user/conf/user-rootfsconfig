@@ -18,8 +18,7 @@ CONFIG_display-fps
 
 CONFIG_face-detection
 
-CONFIG_avnet-u96v2-benchmark
-CONFIG_avnet-u96v2-benchmark-boot
-CONFIG_avnet-u96v2-dualcam-dpu
+
 CONFIG_avnet-packagegroup-u96v2-benchmark
+CONFIG_avnet-packagegroup-u96v2-dualcam-dpu
 CONFIG_avnet-packagegroup-u96v2-dualcam

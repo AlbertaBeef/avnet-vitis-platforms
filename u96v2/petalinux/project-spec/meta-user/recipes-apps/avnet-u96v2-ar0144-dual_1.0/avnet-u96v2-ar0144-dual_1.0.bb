@@ -16,4 +16,4 @@ SRC_URI = "file://u96v2-ar0144-dual.bit \
            "
 
 S = "${WORKDIR}"
-PR = "1.pl2021_2"
+PR = "1.pl2022_1"

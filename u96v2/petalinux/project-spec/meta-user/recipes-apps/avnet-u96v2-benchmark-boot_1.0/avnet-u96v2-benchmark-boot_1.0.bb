@@ -20,10 +20,10 @@ do_install() {
 
 	install -d ${D}/usr/share
 	install -d ${D}/usr/share/vitis_ai_library
-	ln -sf models.b2304 ${D}/usr/share/vitis_ai_library/models
+	ln -sf models.b2304-lr ${D}/usr/share/vitis_ai_library/models
 }
 
-FILES_${PN} += "/etc/dfx-mgrd/default_firmware"
+FILES:${PN} += "/etc/dfx-mgrd/default_firmware"
 
-FILES_${PN} += "/usr/share/vitis_ai_library/models"
+FILES:${PN} += "/usr/share/vitis_ai_library/models"
 
