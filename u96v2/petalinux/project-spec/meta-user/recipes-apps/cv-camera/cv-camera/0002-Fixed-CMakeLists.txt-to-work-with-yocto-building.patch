@@ -1,0 +1,34 @@
+From d17e68441fe4c89cf5d89b4470fa247665b7aae3 Mon Sep 17 00:00:00 2001
+From: Brian Wiec <bswiec@gmail.com>
+Date: Tue, 24 May 2022 10:59:58 -0400
+Subject: [PATCH] Fixed CMakeLists.txt to work with yocto building
+
+---
+ CMakeLists.txt | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c84b79c..6a7c565 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -81,12 +81,16 @@ ament_target_dependencies(cv_camera_node
+ # )
+ 
+ ## Mark executables and/or libraries for installation
+-install(TARGETS cv_camera cv_camera_node
+-  ARCHIVE DESTINATION lib/${PROJECT_NAME}
+-  LIBRARY DESTINATION lib/${PROJECT_NAME}
+-  RUNTIME DESTINATION lib/${PROJECT_NAME}
++install(TARGETS cv_camera
++  ARCHIVE DESTINATION lib
++  LIBRARY DESTINATION lib
++  RUNTIME DESTINATION bin
+   )
+ 
++install (TARGETS cv_camera_node
++	DESTINATION lib/${PROJECT_NAME}
++)
++
+ install(DIRECTORY include/${PROJECT_NAME}/
+   DESTINATION include/
+   )
