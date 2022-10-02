@@ -1,3 +1,11 @@
 /include/ "system-conf.dtsi"
-/ {
+
+/* Remove all PL definitions, for use with FPGA-MANAGER */
+&amba_pl {
+  /delete-node/ axi_apio_0;
+  /delete-node/ axi_apio_1;
+  /delete-node/ axi_gpio_2;
+  /delete-node/ axi_intc_0;
+  /delete-node/ zyxclmm_drm;
 };
+

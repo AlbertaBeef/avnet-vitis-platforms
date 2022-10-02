@@ -181,7 +181,8 @@ CONFIG_SUBSYSTEM_PRELOADED_BL33_BASE=0x8000000
 #
 # FPGA Manager
 #
-# CONFIG_SUBSYSTEM_FPGA_MANAGER is not set
+CONFIG_SUBSYSTEM_FPGA_MANAGER=y
+CONFIG_FPGA_HW_PATH="project-spec/hw-description/system.xsa"
 
 #
 # u-boot Configuration
@@ -250,8 +251,8 @@ CONFIG_SUBSYSTEM_TFTPBOOT_DIR="/tftpboot"
 #
 # Firmware Version Configuration
 #
-CONFIG_SUBSYSTEM_HOSTNAME="uz7ev-evcc-base-2021-2"
-CONFIG_SUBSYSTEM_PRODUCT="uz7ev_evcc_base_2021_2"
+CONFIG_SUBSYSTEM_HOSTNAME="uz7ev-evcc-2021-2"
+CONFIG_SUBSYSTEM_PRODUCT="uz7ev_evcc_2021_2"
 CONFIG_SUBSYSTEM_FW_VERSION="1.00"
 
 #
@@ -284,12 +285,12 @@ CONFIG_YOCTO_PARALLEL_MAKE=""
 #
 # Add pre-mirror url 
 #
-
+CONFIG_PRE_MIRROR_URL="file:///media/albertabeef/Rocinante/Avnet_2021_2/petalinux/projects/cache/downloads_2021.2/"
 
 #
 # Local sstate feeds settings
 #
-
+CONFIG_YOCTO_LOCAL_SSTATE_FEEDS_URL="/media/albertabeef/Rocinante/Avnet_2021_2/petalinux/projects/cache/sstate_2021.2/aarch64/"
 CONFIG_YOCTO_NETWORK_SSTATE_FEEDS=y
 
 #
@@ -305,5 +306,3 @@ CONFIG_YOCTO_NETWORK_SSTATE_FEEDS_URL="http://petalinux.xilinx.com/sswreleases/r
 CONFIG_USER_LAYER_0="${PROOT}/project-spec/meta-avnet"
 CONFIG_USER_LAYER_1=""
 CONFIG_SUBSYSTEM_BOOTARGS_GENERATED=" earlycon console=ttyPS0,115200 clk_ignore_unused root=/dev/mmcblk1p2 rw rootwait"
-CONFIG_YOCTO_LOCAL_SSTATE_FEEDS_URL=""
-CONFIG_PRE_MIRROR_URL="http://petalinux.xilinx.com/sswreleases/rel-v2021/downloads/"
