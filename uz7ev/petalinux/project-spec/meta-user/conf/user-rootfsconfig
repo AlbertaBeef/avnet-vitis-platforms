@@ -9,5 +9,5 @@ CONFIG_vitis-ai-library-dev
 CONFIG_vitis-ai-library-dbg
 
 CONFIG_avnet-packagegroup-uz7ev-benchmark
-#CONFIG_avnet-packagegroup-uz7ev-quadcam-dpu
+CONFIG_avnet-packagegroup-uz7ev-quadcam-dpu
 #CONFIG_avnet-packagegroup-uz7ev-quadcam

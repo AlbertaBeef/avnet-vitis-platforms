@@ -4168,6 +4168,8 @@ CONFIG_auto-login=y
 # user packages 
 #
 CONFIG_avnet-packagegroup-uz7ev-benchmark=y
+# CONFIG_avnet-packagegroup-uz7ev-quadcam is not set
+CONFIG_avnet-packagegroup-uz7ev-quadcam-dpu=y
 # CONFIG_gpio-demo is not set
 # CONFIG_peekpoke is not set
 CONFIG_vitis-ai-library=y
