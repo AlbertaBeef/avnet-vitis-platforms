@@ -8,57 +8,47 @@
 
 /dts-v1/;
 /plugin/;
-/{ 
-	fragment@0 {
-		target = <&fpga_full>;
-		overlay0: __overlay__ {
-			#address-cells = <2>;
-			#size-cells = <2>;
-			firmware-name = "uz7ev-benchmark.bit.bin";
-			resets = <&zynqmp_reset 116>, <&zynqmp_reset 117>, <&zynqmp_reset 118>, <&zynqmp_reset 119>;
-		};
+
+
+&fpga_full {
+	#address-cells = <2>;
+	#size-cells = <2>;
+	firmware-name = "uz7ev-benchmark.bit.bin";
+	resets = <&zynqmp_reset 116>, <&zynqmp_reset 117>, <&zynqmp_reset 118>, <&zynqmp_reset 119>;
+};
+
+&amba {
+	afi0: afi0 {
+		compatible = "xlnx,afi-fpga";
+		config-afi = <0 0>, <1 0>, <2 0>, <3 0>, <4 0>, <5 0>, <6 0>, <7 0>, <8 0>, <9 0>, <10 0>, <11 0>, <12 0>, <13 0>, <14 0xa00>, <15 0x000>;
+		resets = <&zynqmp_reset 116>,
+				<&zynqmp_reset 117>,
+				<&zynqmp_reset 118>,
+				<&zynqmp_reset 119>;
+		reset-names = "pl0", "pl1", "pl2", "pl3";
 	};
-	fragment@1 {
-		target = <&amba>;
-		overlay1: __overlay__ {
-			afi0: afi0 {
-				compatible = "xlnx,afi-fpga";
-				config-afi = <0 0>, <1 0>, <2 0>, <3 0>, <4 0>, <5 0>, <6 0>, <7 0>, <8 0>, <9 0>, <10 0>, <11 0>, <12 0>, <13 0>, <14 0xa00>, <15 0x000>;
-				resets = <&zynqmp_reset 116>,
-						<&zynqmp_reset 117>,
-						<&zynqmp_reset 118>,
-						<&zynqmp_reset 119>;
-				reset-names = "pl0", "pl1", "pl2", "pl3";
-			};
-			
-			axi_intc_0: interrupt-controller@a0030000 {
-				#interrupt-cells = <2>;
-				clock-names = "s_axi_aclk";
-				clocks = <&zynqmp_clk 71>;
-				compatible = "xlnx,axi-intc-4.1", "xlnx,xps-intc-1.00.a";
-				interrupt-controller ;
-				interrupt-names = "irq";
-				interrupt-parent = <&gic>;
-				interrupts = <0 94 1>;
-				reg = <0x0 0xa0030000 0x0 0x10000>;
-				xlnx,kind-of-intr = <0x1>;
-				xlnx,num-intr-inputs = <0x20>;
-			};
-			zocl: zyxclmm_drm {
-				compatible = "xlnx,zocl";
-				status = "okay";
-				interrupt-parent = <&axi_intc_0>;
-				interrupts =
-					<0  4>, <1  4>, <2  4>, <3  4>,
-					<4  4>, <5  4>, <6  4>, <7  4>,
-					<8  4>, <9  4>, <10 4>, <11 4>,
-					<12 4>, <13 4>, <14 4>, <15 4>,
-					<16 4>, <17 4>, <18 4>, <19 4>,
-					<20 4>, <21 4>, <22 4>, <23 4>,
-					<24 4>, <25 4>, <26 4>, <27 4>,
-					<28 4>, <29 4>, <30 4>, <31 4>;
-			};
-			
+};
+
+
+&zynqmp_dpsub {
+	status = "okay";		
+};
+&zynqmp_dp_snd_pcm0 {
+	status = "okay";		
+};
+&zynqmp_dp_snd_pcm1 {
+	status = "okay";		
+};
+&zynqmp_dp_snd_card0 {
+	status = "okay";		
+};
+&zynqmp_dp_snd_codec0 {
+	status = "okay";		
+};
+
+// pl.dtsi
+
+&amba_pl {
 		axi_gpio_0: gpio@a0000000 {
 			#gpio-cells = <3>;
 			#interrupt-cells = <2>;
@@ -129,40 +119,26 @@
 			xlnx,tri-default = <0xFFFFFFFF>;
 			xlnx,tri-default-2 = <0xFFFFFFFF>;
 		};
-			
+		axi_intc_0: interrupt-controller@a0030000 {
+			#interrupt-cells = <2>;
+			clock-names = "s_axi_aclk";
+			clocks = <&zynqmp_clk 71>;
+			compatible = "xlnx,axi-intc-4.1", "xlnx,xps-intc-1.00.a";
+			interrupt-controller ;
+			interrupt-names = "irq";
+			interrupt-parent = <&gic>;
+			interrupts = <0 94 1>;
+			reg = <0x0 0xa0030000 0x0 0x10000>;
+			xlnx,kind-of-intr = <0x1>;
+			xlnx,num-intr-inputs = <0x20>;
 		};
-	};
-	fragment@2 {
-		target = <&zynqmp_dpsub>;
-		overlay2: __overlay__ {
-			status = "okay";		
+		zyxclmm_drm {
+			compatible = "xlnx,zocl";
+			interrupts-extended = <&axi_intc_0 0 4>, <&axi_intc_0 1 4>, <&axi_intc_0 2 4>, <&axi_intc_0 3 4>, <&axi_intc_0 4 4>, <&axi_intc_0 5 4>, <&axi_intc_0 6 4>, <&axi_intc_0 7 4>, <&axi_intc_0 8 4>, <&axi_intc_0 9 4>,
+<&axi_intc_0 10 4>, <&axi_intc_0 11 4>, <&axi_intc_0 12 4>, <&axi_intc_0 13 4>, <&axi_intc_0 14 4>,
+<&axi_intc_0 15 4>, <&axi_intc_0 16 4>, <&axi_intc_0 17 4>, <&axi_intc_0 18 4>, <&axi_intc_0 19 4>,
+<&axi_intc_0 20 4>, <&axi_intc_0 21 4>, <&axi_intc_0 22 4>, <&axi_intc_0 23 4>, <&axi_intc_0 24 4>,
+<&axi_intc_0 25 4>, <&axi_intc_0 26 4>, <&axi_intc_0 27 4>, <&axi_intc_0 28 4>, <&axi_intc_0 29 4>,
+<&axi_intc_0 30 4>, <&axi_intc_0 31 4 >;
 		};
-	};
-	fragment@3 {
-		target = <&zynqmp_dp_snd_pcm0>;
-		overlay3: __overlay__ {
-			status = "okay";		
-		};
-	};
-	fragment@4 {
-		target = <&zynqmp_dp_snd_pcm1>;
-		overlay4: __overlay__ {
-			status = "okay";		
-		};
-	};
-	fragment@5 {
-		target = <&zynqmp_dp_snd_card0>;
-		overlay5: __overlay__ {
-			status = "okay";		
-		};
-	};
-	fragment@6 {
-		target = <&zynqmp_dp_snd_codec0>;
-		overlay6: __overlay__ {
-			status = "okay";		
-		};
-	};
-
 };
-
-
