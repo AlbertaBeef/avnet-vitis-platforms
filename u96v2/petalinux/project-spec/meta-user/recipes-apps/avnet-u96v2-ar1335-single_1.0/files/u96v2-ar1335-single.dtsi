@@ -14,7 +14,7 @@
 &fpga_full {	
 	#address-cells = <2>;
 	#size-cells = <2>;
-	firmware-name = "u96v2-dualcam-dpu.bit.bin";
+	firmware-name = "u96v2-ar1335-single.bit.bin";
 	resets = <&zynqmp_reset 116>, <&zynqmp_reset 117>, <&zynqmp_reset 118>, <&zynqmp_reset 119>;
 };
 
@@ -42,6 +42,8 @@
 			reg = <2>;
 			ias_out0: endpoint {
 				remote-endpoint = <&mipi_csi_inCAPTURE_PIPELINE_mipi_csi2_rx_subsyst_0>;
+				link-frequencies = /bits/ 64 <900000000>;
+				clock-lanes = <0>;
 				data-lanes = <1 2 3 4>;
 			};
 		};

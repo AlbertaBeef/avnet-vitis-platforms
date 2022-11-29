@@ -3,6 +3,7 @@ DESCRIPTION = "ZUBoard DUALCAM + DPU (B128) related packages"
 inherit packagegroup
 
 ZUB1CG_DUALCAM_DPU_PACKAGES = " \
+   ap1302 \
    ap1302-firmware \
    avnet-zub1cg-dualcam-dpu \
    libdrm libdrm-tests libdrm-kms \

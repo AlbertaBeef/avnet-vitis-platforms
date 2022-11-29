@@ -3,6 +3,7 @@ DESCRIPTION = "Ultra96-V2 DUALCAM related packages"
 inherit packagegroup
 
 U96V2_DUALCAM_DPU_PACKAGES = " \
+   ap1302 \
    ap1302-firmware \
    avnet-u96v2-dualcam-dpu \
    libdrm libdrm-tests libdrm-kms \

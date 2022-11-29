@@ -73,7 +73,7 @@
 		};
 
 		GPIO_axi_gpio_0: gpio@a0000000 {
-			#gpio-cells = <3>;
+			#gpio-cells = <2>;
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 71>;
 			compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
@@ -110,13 +110,15 @@
 
 				clocks = <&ap1302_osc>;
 
-				reset-gpios = <&GPIO_axi_gpio_0 6 0 GPIO_ACTIVE_LOW>;
-				standby-gpios = <&GPIO_axi_gpio_0 7 0 GPIO_ACTIVE_HIGH>;
+				reset-gpios = <&GPIO_axi_gpio_0 6 GPIO_ACTIVE_LOW>;
+				standby-gpios = <&GPIO_axi_gpio_0 7 GPIO_ACTIVE_HIGH>;
 
 				port@2 {
 					reg = <2>;
 					ias_out0: endpoint {
 						remote-endpoint = <&mipi_csi_inCAPTURE_PIPELINE_mipi_csi2_rx_subsyst_0>;
+						link-frequencies = /bits/ 64 <900000000>;
+						clock-lanes = <0>;
 						data-lanes = <1 2 3 4>;
 					};
 				};
@@ -198,7 +200,7 @@
 			xlnx,topology = <3>;
 			xlnx,use-uram = <0>;
 			xlnx,video-width = <8>;
-			reset-gpios = <&GPIO_axi_gpio_0 4 0 GPIO_ACTIVE_LOW>;
+			reset-gpios = <&GPIO_axi_gpio_0 4 GPIO_ACTIVE_LOW>;
 			csc_portsCAPTURE_PIPELINE_v_proc_ss_csc_0: ports {
 				#address-cells = <1>;
 				#size-cells = <0>;
@@ -248,7 +250,7 @@
 			xlnx,v-scaler-phases = <64>;
 			xlnx,v-scaler-taps = <8>;
 			xlnx,video-width = <8>;
-			reset-gpios = <&GPIO_axi_gpio_0 5 0 GPIO_ACTIVE_LOW>;
+			reset-gpios = <&GPIO_axi_gpio_0 5 GPIO_ACTIVE_LOW>;
 			scaler_portsCAPTURE_PIPELINE_v_proc_ss_scaler_0: ports {
 				#address-cells = <1>;
 				#size-cells = <0>;
@@ -292,7 +294,7 @@
 			xlnx,s-axi-ctrl-data-width = <0x20>;
 			xlnx,vid-formats = "rgb888", "uyvy", "y8", "yuyv";
 			xlnx,video-width = <8>;
-			reset-gpios = <&GPIO_axi_gpio_0 3 0 GPIO_ACTIVE_LOW>;
+			reset-gpios = <&GPIO_axi_gpio_0 3 GPIO_ACTIVE_LOW>;
 		};
 		vcap_CAPTURE_PIPELINE_v_proc_ss_scaler_0 {
 			compatible = "xlnx,video";
