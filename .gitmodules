@@ -1,0 +1,3 @@
+[submodule "common/platforms/bdf"]
+	path = common/platforms/bdf
+	url = https://github.com/Avnet/bdf
