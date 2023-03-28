@@ -1,14 +1,12 @@
 
 set proj_name zub1cg_sbc_dualcam2
 set proj_dir ./project
-set proj_board avnet:zub1cg:1.0
+set proj_board avnet.com:zuboard_1cg:part0:1.1
 set bd_tcl_dir ./scripts
 set board xboard_zu1
 set rev None
 set output {xsa}
 set xdc_list {./xdc/pin.xdc}
-#set ip_repo_path {./ip}
-#set ip_repo_path {../ip}
 set src_repo_path {./src}
 set jobs 8
 
@@ -35,9 +33,8 @@ if {[expr {![catch {file lstat $bdf_path finfo}]}]} {
    return -code ok
 }
 
-#create_project -name $proj_name -force -dir $proj_dir -part [get_property PART_NAME [get_board_parts $proj_board]]
-#set_property board_part $proj_board [current_project]
-create_project -name $proj_name -force -dir $proj_dir -part xczu1cg-sbva484-1-e
+create_project -name $proj_name -force -dir $proj_dir -part [get_property PART_NAME [get_board_parts $proj_board]]
+set_property board_part $proj_board [current_project]
 
 import_files -fileset constrs_1 $xdc_list
 

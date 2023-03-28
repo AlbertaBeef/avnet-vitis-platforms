@@ -5,15 +5,15 @@ PWD = $(shell readlink -f .)
 
 # the platform directory has to be an absolute path when passed to v++
 PFM_DIR = $(PWD)/platforms
-PFM_VER = 2022_1
+PFM_VER = 2022_2
 
 # valid platforms / overlays
-PFM_LIST = zub1cg_sbc_minimal zub1cg_sbc_dualcam1 zub1cg_sbc_dualcam2
+PFM_LIST = zub1cg_sbc_base zub1cg_sbc_dualcam zub1cg_sbc_minimal zub1cg_sbc_dualcam1 zub1cg_sbc_dualcam2
 OVERLAY_LIST =  benchmark dualcam_dpu
 
 # override platform name based on overlay
 ifeq ($(OVERLAY),benchmark)
-  override PFM = zub1cg_sbc_minimal
+  override PFM = zub1cg_sbc_base
 endif
 ifeq ($(OVERLAY),dualcam_dpu)
   override PFM = zub1cg_sbc_dualcam2
