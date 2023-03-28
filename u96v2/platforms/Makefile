@@ -1,4 +1,4 @@
-# (C) Copyright 2022 Avnet, Inc.
+# (C) Copyright 2023 Avnet, Inc.
 # SPDX-License-Identifier: Apache-2.0
 
 CP = cp -rf
@@ -8,7 +8,7 @@ XSCT = $(XILINX_VITIS)/bin/xsct
 JOBS ?= 8
 
 PLATFORM ?= u96v2_sbc_minimal
-VERSION ?= 2022_1
+VERSION ?= 2022_2
 
 PFM_DIR = avnet_$(PLATFORM)_$(VERSION)
 PFM_PRJ_DIR = xsct/$(PLATFORM)/$(PLATFORM)/export/$(PLATFORM)

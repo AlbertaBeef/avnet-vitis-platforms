@@ -1,4 +1,4 @@
-# (C) Copyright 2020 - 2021 Xilinx, Inc.
+# (C) Copyright 2023 Avnet, Inc.
 # SPDX-License-Identifier: Apache-2.0
 
 # Help function
