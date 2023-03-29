@@ -7,6 +7,7 @@ set board ultra96v2
 set rev None
 set output {xsa}
 set xdc_list {./xdc/pin.xdc}
+set ip_repo_path {./ip}
 set src_repo_path {./src}
 set jobs 8
 
@@ -38,8 +39,8 @@ set_property board_part $proj_board [current_project]
 
 import_files -fileset constrs_1 $xdc_list
 
-#set_property ip_repo_paths $ip_repo_path [current_project]
-#update_ip_catalog
+set_property ip_repo_paths $ip_repo_path [current_project]
+update_ip_catalog
 
 # Create block diagram design and set as current design
 set design_name $proj_name

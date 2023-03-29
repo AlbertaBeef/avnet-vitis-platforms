@@ -1,5 +1,5 @@
 # /*
-# * Copyright 2022 Avnet Inc.
+# * Copyright 2019 Xilinx Inc.
 # *
 # * Licensed under the Apache License, Version 2.0 (the "License");
 # * you may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@
 if { [info exists ::env(TRD_PATH)] } {
     set path_to_hdl "$env(TRD_PATH)/dpu_ip"
 } else {
-    #set path_to_hdl "../../dpu_ip"
-    set path_to_hdl "../../../../common/overlays/dpu_ip/"
+    set path_to_hdl "../../dpu_ip"
 }
 
 set path_to_packaged "./packaged_kernel_${suffix}"
