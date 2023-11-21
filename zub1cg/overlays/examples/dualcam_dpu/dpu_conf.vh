@@ -36,6 +36,7 @@
 // | for zcu102 : `define URAM_DISABLE                 
 // |------------------------------------------------------|
 
+//`define URAM_ENABLE 
 `define URAM_DISABLE
 
 //config URAM

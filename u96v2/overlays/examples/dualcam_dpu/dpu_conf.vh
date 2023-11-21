@@ -36,6 +36,7 @@
 // | for zcu102 : `define URAM_DISABLE                 
 // |------------------------------------------------------|
 
+//`define URAM_ENABLE 
 `define URAM_DISABLE
 
 //config URAM
@@ -106,7 +107,7 @@
 `define DWCV_ENABLE
 
 // |------------------------------------------------------|
-// | Pool Average Configuration
+// | ALU parallel Configuration
 // | It relates to model. if change, must update model
 // +------------------------------------------------------+
 // | setting 0  : `define ALU_PARALLEL_DEFAULT              

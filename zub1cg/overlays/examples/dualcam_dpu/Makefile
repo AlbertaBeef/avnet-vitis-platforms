@@ -1,4 +1,4 @@
-# (C) Copyright 2022 Avnet, Inc.
+# (C) Copyright 2020 - 2022 Xilinx, Inc.
 # SPDX-License-Identifier: Apache-2.0
 
 DIR_PRJ = $(shell pwd)
@@ -34,12 +34,12 @@ XOCC_OPTS = -t ${TARGET} --platform ${PLATFORM} --save-temps --config ${DIR_PRJ}
 dpu_HDLSRCS=kernel_xml/dpu/kernel.xml\
 	     scripts/package_dpu_kernel.tcl\
 	     scripts/gen_dpu_xo.tcl\
-	     ../../../../common/overlays/dpu_ip/Vitis/dpu/hdl/DPUCZDX8G.v\
-	     ../../../../common/overlays/dpu_ip/Vitis/dpu/inc/arch_def.vh\
-	     ../../../../common/overlays/dpu_ip/Vitis/dpu/xdc/*.xdc\
-	     ../../../../common/overlays/dpu_ip/DPUCZDX8G_*/hdl/DPUCZDX8G_*_dpu.sv\
-	     ../../../../common/overlays/dpu_ip/DPUCZDX8G_*/inc/function.vh\
-	     ../../../../common/overlays/dpu_ip/DPUCZDX8G_*/inc/arch_para.vh
+	     ../../dpu_ip/Vitis/dpu/hdl/DPUCZDX8G.v\
+	     ../../dpu_ip/Vitis/dpu/inc/arch_def.vh\
+	     ../../dpu_ip/Vitis/dpu/xdc/*.xdc\
+	     ../../dpu_ip/DPUCZDX8G_*/hdl/DPUCZDX8G_*_dpu.sv\
+	     ../../dpu_ip/DPUCZDX8G_*/inc/function.vh\
+             ../../dpu_ip/DPUCZDX8G_*/inc/arch_para.vh
 
 dpu_TCL=scripts/gen_dpu_xo.tcl
 DPU_KERN_NAME = DPUCZDX8G
